@@ -3,6 +3,7 @@ services:
   db:
     image: postgres:15
     restart: always
+
 #    environment:
 #      POSTGRES_USER: ${POSTGRES_USER}
 #      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -25,9 +26,11 @@ services:
       - "6379:6379"
 
   backend:
+
     build:
       context: .
       dockerfile: backend/Dockerfile
+
     restart: always
     depends_on:
       - db
@@ -45,8 +48,8 @@ services:
     depends_on:
       - backend
     env_file:
-      - ./env/.env
 
+      - ./env/.env
   userbot:
     build:
       context: .

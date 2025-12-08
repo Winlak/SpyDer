@@ -15,6 +15,7 @@ async def cmd_start(message: Message) -> None:
     user = message.from_user
     if user is None:
         return
+
     is_premium = user.is_premium
     await backend_client.upsert_user(telegram_id=user.id, is_premium=is_premium)
     kb = MenuFactory.start_menu(is_premium=is_premium).as_markup()

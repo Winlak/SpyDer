@@ -40,6 +40,7 @@ class Account(Base, TimestampMixin):
     session_string: Mapped[str] = mapped_column(Text)
     status: Mapped[str] = mapped_column(String(20), default=AccountStatusEnum.ACTIVE)
 
+
     user: Mapped[User] = relationship(back_populates="accounts")
 
 
