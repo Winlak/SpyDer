@@ -38,7 +38,7 @@ class Account(Base, TimestampMixin):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
     session_string: Mapped[str] = mapped_column(Text)
-    status: Mapped[str] = mapped_column(String(20), default=AccountStatusEnum.ACTIVE.value)
+    status: Mapped[str] = mapped_column(String(20), default=AccountStatusEnum.ACTIVE)
 
     user: Mapped[User] = relationship(back_populates="accounts")
 
