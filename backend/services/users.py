@@ -19,6 +19,7 @@ async def upsert_user(session: AsyncSession, telegram_id: int, is_premium: bool 
     elif is_premium is not None and user.is_premium != is_premium:
         user.is_premium = is_premium
 
+
     await session.commit()
     await session.refresh(user)
     return user

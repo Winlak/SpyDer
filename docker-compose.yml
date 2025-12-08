@@ -3,16 +3,21 @@ services:
   db:
     image: postgres:15
     restart: always
+
+#    environment:
+#      POSTGRES_USER: ${POSTGRES_USER}
+#      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+#      POSTGRES_DB: ${POSTGRES_DB}
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: spyder
+      POSTGRES_PASSWORD: spyder
+      POSTGRES_DB: spyder
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
     env_file:
-      - ./env/.env.example
+      - ./env/.env
 
   redis:
     image: redis:7
@@ -21,31 +26,39 @@ services:
       - "6379:6379"
 
   backend:
-    build: ./backend
+
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+
     restart: always
     depends_on:
       - db
     env_file:
-      - ./env/.env.example
+      - ./env/.env
     ports:
       - "8000:8000"
     command: ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
 
   bot:
-    build: ./bot
+    build:
+      context: .
+      dockerfile: bot/Dockerfile
     restart: always
     depends_on:
       - backend
     env_file:
-      - ./env/.env.example
 
+      - ./env/.env
   userbot:
-    build: ./userbot
+    build:
+      context: .
+      dockerfile: userbot/Dockerfile
     restart: always
     depends_on:
       - backend
     env_file:
-      - ./env/.env.example
+      - ./env/.env
 
 volumes:
   db_data:
