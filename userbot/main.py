@@ -25,7 +25,5 @@ async def main() -> None:
     logging.info("Userbot started")
     await manager.run_forever()
 
-
-
 if __name__ == "__main__":
     asyncio.run(main())
