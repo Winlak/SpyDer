@@ -25,12 +25,10 @@ app.add_middleware(
 app.include_router(users.router)
 app.include_router(messages.router)
 
-
 @app.on_event("startup")
 async def on_startup() -> None:
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
-
 
 @app.get("/")
 async def root():

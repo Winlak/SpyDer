@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import asyncio
 import logging
-
 from userbot.client_manager import ClientManager
 from userbot.config import settings
 from userbot.handlers import bind_handlers
@@ -25,7 +24,6 @@ async def main() -> None:
     await bind_handlers(client)
     logging.info("Userbot started")
     await manager.run_forever()
-
 
 if __name__ == "__main__":
     asyncio.run(main())

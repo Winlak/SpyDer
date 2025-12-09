@@ -13,5 +13,4 @@ class UserbotSettings(BaseSettings):
 
     model_config = SettingsConfigDict(env_prefix="", env_file="env/.env", extra="ignore")
 
-
 settings = UserbotSettings()  # type: ignore
